@@ -1,0 +1,52 @@
+﻿@using ToDoWebApplication.data
+@using ToDoWebApplication.web.Models
+@model IndexView
+<div class="row">                
+    <form  action="/">
+        <div class="col-md-4 col-md-offset-4">
+            <select class="form-control" name ="CategoryId" id="choose-form">
+                <option value="0">Choose A Category to filter</option>
+                @foreach (Category category in Model.Categories)
+                {
+                    <option value="@category.Id" >@category.Name</option>
+                }
+            </select>
+            <button hidden id="btnSubmit"></button>
+        </div> 
+    </form>
+</div>  
+              
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-striped table-bordered table-hover" style="margin-top: 20px;">
+            <tr>
+                <th>Title</th>
+                <th>Short Description</th>
+                <th>Due Date</th>
+                <th>completed</th>
+                <th>Category name</th>
+            </tr>
+            @foreach(ToDo td in Model.ToDos)
+            {
+               
+                <tr>
+                    <td><a href="home/ToDo?toDo=@td">@td.Title</a></td>
+                    <td>@td.Description</td>
+                    <td>@td.DueDate.ToLongDateString() @td.DueDate.ToShortTimeString()</td>
+                    <td>@if (td.IsCompleted == true)
+                            {
+                                <input type="checkbox" checked disabled />
+                            }
+                         else
+                            {
+                                <input type="checkbox" disabled />
+                            }
+                    </td>
+                    <td>@td.Category</td>
+                </tr>
+            }
+        </table>
+    </div>
+@section scripts
+    { 
+    <script src="~/Scripts/JavaScript.js"></script>
+    }

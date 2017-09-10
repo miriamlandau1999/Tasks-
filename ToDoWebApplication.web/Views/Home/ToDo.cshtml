@@ -1,0 +1,18 @@
+﻿
+@using ToDoWebApplication.web.Models
+@model TodoView
+
+<h1>@Model.ToDo.Title</h1>
+<br />
+<p>@Model.ToDo.Description</p>
+<br />
+<p>Date Due: @Model.ToDo.DueDate</p>
+@if (Model.ToDo.IsCompleted)
+{
+    <p>Is completed</p>
+}
+else
+{
+    <p>Not completed</p>
+}
+<button class="btn btn-danger">Mark as done</button>
